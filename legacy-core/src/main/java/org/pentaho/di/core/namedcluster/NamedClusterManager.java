@@ -298,7 +298,7 @@ public class NamedClusterManager {
       String scheme, IMetaStore metastore, VariableSpace variableSpace ) {
     String outgoingURL = null;
     String clusterURL = null;
-    if ( !scheme.equals( NamedCluster.MAPRFS_SCHEME ) ) {
+    if ( !scheme.equals( NamedCluster.MAPRFS_SCHEME ) && !scheme.equals( NamedCluster.ABFS_SCHEME )) {
       clusterURL = generateURL( scheme, clusterName, metastore, variableSpace );
     }
     try {
