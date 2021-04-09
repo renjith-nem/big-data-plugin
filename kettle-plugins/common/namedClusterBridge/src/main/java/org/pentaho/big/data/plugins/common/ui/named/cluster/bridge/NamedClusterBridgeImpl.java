@@ -256,6 +256,18 @@ public class NamedClusterBridgeImpl implements NamedCluster {
         url = org.pentaho.di.core.namedcluster.model.NamedCluster.MAPRFS_SCHEME + "://" + url;
       }
       return url;
+    } else if ( getStorageScheme() != null && getStorageScheme().equalsIgnoreCase( org.pentaho.di.core.namedcluster.model.NamedCluster.ABFS_SCHEME ) ) {
+      String url = namedClusterManager.processURLsubstitution( getName(), incomingURL, org.pentaho.di.core.namedcluster.model.NamedCluster.ABFS_SCHEME, metastore, variableSpace );
+      if ( url != null && !url.startsWith( org.pentaho.di.core.namedcluster.model.NamedCluster.ABFS_SCHEME ) ) {
+        url = org.pentaho.di.core.namedcluster.model.NamedCluster.ABFS_SCHEME + "://" + url;
+      }
+      return url;
+    } else if ( getStorageScheme() != null && getStorageScheme().equalsIgnoreCase( org.pentaho.di.core.namedcluster.model.NamedCluster.WASB_SCHEME ) ) {
+      String url = namedClusterManager.processURLsubstitution( getName(), incomingURL, org.pentaho.di.core.namedcluster.model.NamedCluster.WASB_SCHEME, metastore, variableSpace );
+      if ( url != null && !url.startsWith( org.pentaho.di.core.namedcluster.model.NamedCluster.WASB_SCHEME ) ) {
+        url = org.pentaho.di.core.namedcluster.model.NamedCluster.WASB_SCHEME + "://" + url;
+      }
+      return url;
     } else {
       return namedClusterManager.processURLsubstitution( getName(), incomingURL, org.pentaho.di.core.namedcluster.model.NamedCluster.HDFS_SCHEME, metastore, variableSpace );
     }

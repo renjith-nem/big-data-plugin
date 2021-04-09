@@ -959,7 +959,11 @@ public abstract class AbstractSqoopJobEntryController<S extends SqoopConfig, E e
             }
           } else if ( !initialFile.getName().getScheme().startsWith( Schemes.HDFS_SCHEME ) ) {
             return null;
-          }
+          } else if ( !initialFile.getName().getScheme().startsWith( Schemes.ABFS_SCHEME ) ) {
+            return null;
+          } else if ( !initialFile.getName().getScheme().startsWith( Schemes.WASB_SCHEME ) ) {
+          return null;
+        }
         } catch ( Exception ex ) {
           return null;
         }

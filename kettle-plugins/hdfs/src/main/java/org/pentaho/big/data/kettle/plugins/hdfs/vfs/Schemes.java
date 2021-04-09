@@ -29,7 +29,11 @@ public class Schemes {
   public static final String HDFS_SCHEME = "hdfs";
   public static final String HDFS_SCHEME_DISPLAY_NAME = "HDFS";
   public static final String MAPRFS_SCHEME = "maprfs";
+  public static final String ABFS_SCHEME = "abfs";
+  public static final String WASB_SCHEME = "wasb";
   public static final String MAPRFS_SCHEME_DISPLAY_NAME = "MapRFS";
+  public static final String ABFS_SCHEME_DISPLAY_NAME = "ABFS";
+  public static final String WASB_SCHEME_DISPLAY_NAME = "WASB";
   public static final String NAMED_CLUSTER_SCHEME = "hc";
   public static final String NAMED_CLUSTER_SCHEME_DISPLAY_NAME = "Hadoop Cluster";
   public static final String S3_SCHEME = "s3";

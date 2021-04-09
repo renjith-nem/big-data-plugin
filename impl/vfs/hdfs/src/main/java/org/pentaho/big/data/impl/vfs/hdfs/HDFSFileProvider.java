@@ -52,6 +52,8 @@ public class HDFSFileProvider extends AbstractOriginatingFileProvider {
    */
   public static final String SCHEME = "hdfs";
   public static final String MAPRFS = "maprfs";
+  public static final String ABFS = "abfs";
+  public static final String WASB = "wasb";
   /**
    * User Information.
    */
@@ -86,7 +88,7 @@ public class HDFSFileProvider extends AbstractOriginatingFileProvider {
                            DefaultFileSystemManager fileSystemManager, MetastoreLocatorOsgi metaStore )
     throws FileSystemException {
     this( hadoopFileSystemLocator, namedClusterService, fileSystemManager, HDFSFileNameParser.getInstance(),
-      new String[] { SCHEME, MAPRFS }, metaStore );
+      new String[] { SCHEME, MAPRFS, ABFS, WASB }, metaStore );
   }
 
   public HDFSFileProvider( HadoopFileSystemLocator hadoopFileSystemLocator, NamedClusterService namedClusterService,

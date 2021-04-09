@@ -53,6 +53,7 @@ public class NamedCluster implements Cloneable, VariableSpace {
 
   public static final String HDFS_SCHEME = "hdfs";
   public static final String MAPRFS_SCHEME = "maprfs";
+  public static final String ABFS_SCHEME = "abfs";
   public static final String WASB_SCHEME = "wasb";
 
   @MetaStoreAttribute

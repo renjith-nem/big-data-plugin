@@ -74,6 +74,7 @@ public class NamedClusterImpl implements NamedCluster, NamedClusterOsgi {
   public static final String HDFS_SCHEME = "hdfs";
   public static final String MAPRFS_SCHEME = "maprfs";
   public static final String WASB_SCHEME = "wasb";
+  public static final String ABFS_SCHEME = "abfs";
   public static final String NC_SCHEME = "hc";
   public static final String ID = "id";
   public static final String CHILD = "child";
@@ -173,6 +174,10 @@ public class NamedClusterImpl implements NamedCluster, NamedClusterOsgi {
     if ( storageScheme == null ) {
       if ( isMapr() ) {
         storageScheme = MAPRFS_SCHEME;
+      } else if ( hasAbfsScheme()) {
+        storageScheme = ABFS_SCHEME;
+      } else if ( hasWasbScheme()){
+        storageScheme = WASB_SCHEME;
       } else {
         storageScheme = HDFS_SCHEME;
       }
@@ -292,6 +297,18 @@ public class NamedClusterImpl implements NamedCluster, NamedClusterOsgi {
         url = MAPRFS_SCHEME + "://" + url;
       }
       return url;
+    } else if ( hasAbfsScheme() ) {
+      String url = processURLsubstitution( incomingURL, ABFS_SCHEME, metastore, variableSpace );
+      if ( url != null && !url.startsWith( ABFS_SCHEME ) ) {
+        url = ABFS_SCHEME + "://" + url;
+      }
+      return url;
+    } else if ( hasWasbScheme() ) {
+      String url = processURLsubstitution( incomingURL, WASB_SCHEME, metastore, variableSpace );
+      if ( url != null && !url.startsWith( WASB_SCHEME ) ) {
+        url = WASB_SCHEME + "://" + url;
+      }
+      return url;
     } else {
       return processURLsubstitution( incomingURL, getStorageScheme(), metastore, variableSpace );
     }
@@ -302,7 +319,7 @@ public class NamedClusterImpl implements NamedCluster, NamedClusterOsgi {
 
     String outgoingURL = null;
     String clusterURL = null;
-    if ( !hdfsScheme.equals( MAPRFS_SCHEME ) ) {
+    if ( !hdfsScheme.equals( MAPRFS_SCHEME ) && !hdfsScheme.equals( ABFS_SCHEME ) && !hdfsScheme.equals( WASB_SCHEME ) ) {
       clusterURL = generateURL( hdfsScheme, metastore, variableSpace );
     }
     try {
@@ -332,7 +349,7 @@ public class NamedClusterImpl implements NamedCluster, NamedClusterOsgi {
           String filePath = variableSpace.environmentSubstitute( path );
           StringBuilder pattern = new StringBuilder();
           pattern.append( "^(" ).append( HDFS_SCHEME ).append( "|" ).append( WASB_SCHEME ).append( "|" ).append(
-              MAPRFS_SCHEME ).append( "|" ).append( NC_SCHEME ).append( "):\\/\\/" );
+              MAPRFS_SCHEME ).append( "|" ).append( NC_SCHEME ).append( "|" ).append( ABFS_SCHEME ).append( "):\\/\\/" );
           Pattern r = Pattern.compile( pattern.toString() );
           Matcher m = r.matcher( filePath );
           prependCluster = !m.find();
@@ -552,6 +569,14 @@ public class NamedClusterImpl implements NamedCluster, NamedClusterOsgi {
     } else {
       return storageScheme.equals( MAPRFS_SCHEME );
     }
+  }
+
+  public boolean hasAbfsScheme() {
+      return (storageScheme !=null && storageScheme.equals( ABFS_SCHEME ));
+  }
+
+  public boolean hasWasbScheme() {
+    return (storageScheme !=null && storageScheme.equals( WASB_SCHEME ));
   }
 
   @Override
