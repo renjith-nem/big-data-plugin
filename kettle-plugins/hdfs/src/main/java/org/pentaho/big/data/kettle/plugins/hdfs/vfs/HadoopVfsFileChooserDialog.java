@@ -181,8 +181,8 @@ public class HadoopVfsFileChooserDialog extends CustomVfsUiPanel {
     NamedCluster nc = getNamedClusterWidget().getSelectedNamedCluster();
     // The Named Cluster may be hdfs, maprfs or wasb.  We need to detect it here since the named
     // cluster was just selected.
-    schemeName = "wasb".equals( nc.getStorageScheme() ) ? "wasb" : "hdfs";
-
+//    schemeName = "wasb".equals( nc.getStorageScheme() ) ? "wasb" : "hdfs";
+    schemeName = nc.getStorageScheme();
     FileObject root = rootFile;
     try {
       root = KettleVFS.getFileObject( nc.processURLsubstitution( FileName.ROOT_PATH, Spoon.getInstance().getMetaStore(), getVariableSpace() ) );

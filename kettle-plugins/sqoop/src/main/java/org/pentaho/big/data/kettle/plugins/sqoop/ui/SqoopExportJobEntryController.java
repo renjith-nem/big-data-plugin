@@ -70,6 +70,7 @@ public class SqoopExportJobEntryController extends
     try {
       String[] schemeRestrictions = new String[1];
       if ( selectedNamedCluster != null && !"false".equals( selectedNamedCluster.getVariable( "valid" ) ) ) {
+        //ABFS ?
         schemeRestrictions[0] = selectedNamedCluster.isMapr() ? Schemes.MAPRFS_SCHEME : Schemes.HDFS_SCHEME;
       } else {
         // must select cluster

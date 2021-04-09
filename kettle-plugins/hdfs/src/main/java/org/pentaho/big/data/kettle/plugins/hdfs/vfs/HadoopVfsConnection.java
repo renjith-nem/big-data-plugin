@@ -70,6 +70,11 @@ public class HadoopVfsConnection {
     if ( Schemes.MAPRFS_SCHEME.equals( schemeName ) ) {
       return Schemes.MAPRFS_SCHEME.concat( "://" );
     }
+
+    if ( Schemes.ABFS_SCHEME.equals( schemeName ) ) {
+      return Schemes.ABFS_SCHEME.concat( "://" );
+    }
+
     StringBuffer urlString =
         new StringBuffer( !Utils.isEmpty( schemeName ) ? schemeName : SCHEME_NAME ).append( "://" );
     if ( !Utils.isEmpty( getUsername() ) ) {
