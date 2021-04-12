@@ -307,6 +307,11 @@ public class JobEntryHadoopCopyFilesDialog extends JobEntryCopyFilesDialog {
               fileChooserDialog.open( shell, new String[] { Schemes.ABFS_SCHEME },
                 Schemes.ABFS_SCHEME, false, path, new String[] { "*.*" }, FILETYPES, true,
                 VfsFileChooserDialog.VFS_DIALOG_OPEN_FILE_OR_DIRECTORY, false, false );
+          } else if ( namedCluster.getStorageScheme().equalsIgnoreCase( Schemes.WASB_SCHEME ) ) {
+            selectedFile =
+                    fileChooserDialog.open( shell, new String[] { Schemes.WASB_SCHEME },
+                            Schemes.WASB_SCHEME, false, path, new String[] { "*.*" }, FILETYPES, true,
+                            VfsFileChooserDialog.VFS_DIALOG_OPEN_FILE_OR_DIRECTORY, false, false );
           } else {
             List<CustomVfsUiPanel> customPanels = fileChooserDialog.getCustomVfsUiPanels();
             for ( CustomVfsUiPanel panel : customPanels ) {

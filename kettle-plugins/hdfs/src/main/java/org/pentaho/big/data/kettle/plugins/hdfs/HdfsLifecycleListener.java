@@ -22,12 +22,8 @@
 
 package org.pentaho.big.data.kettle.plugins.hdfs;
 
-import org.pentaho.big.data.kettle.plugins.hdfs.vfs.ABFSFileChooserDialog;
+import org.pentaho.big.data.kettle.plugins.hdfs.vfs.*;
 import org.pentaho.hadoop.shim.api.cluster.NamedClusterService;
-import org.pentaho.big.data.kettle.plugins.hdfs.vfs.HadoopVfsFileChooserDialog;
-import org.pentaho.big.data.kettle.plugins.hdfs.vfs.MapRFSFileChooserDialog;
-import org.pentaho.big.data.kettle.plugins.hdfs.vfs.NamedClusterVfsFileChooserDialog;
-import org.pentaho.big.data.kettle.plugins.hdfs.vfs.Schemes;
 import org.pentaho.di.core.annotations.LifecyclePlugin;
 import org.pentaho.di.core.lifecycle.LifeEventHandler;
 import org.pentaho.di.core.lifecycle.LifecycleException;
@@ -46,6 +42,7 @@ public class HdfsLifecycleListener implements LifecycleListener {
   private final int hdfsPriority = 150;
   private final int maprPriority = 160;
   private final int abfsPriority = 170;
+  private final int wasbPriority = 180;
   private final int ncPriority = 110;
 
   private final NamedClusterService ncService;
@@ -54,6 +51,7 @@ public class HdfsLifecycleListener implements LifecycleListener {
   private HadoopVfsFileChooserDialog hdfsFileChooserDialog;
   private MapRFSFileChooserDialog mapRFSFileChooserDialog;
   private ABFSFileChooserDialog abfsFileChooserDialog;
+  private WASBFileChooserDialog wasbFileChooserDialog;
   private NamedClusterVfsFileChooserDialog ncFileChooserDialog;
 
   public HdfsLifecycleListener( NamedClusterService namedClusterService,
@@ -76,6 +74,8 @@ public class HdfsLifecycleListener implements LifecycleListener {
         dialog.addVFSUIPanel( maprPriority, mapRFSFileChooserDialog );
         abfsFileChooserDialog = new ABFSFileChooserDialog( Schemes.ABFS_SCHEME, Schemes.ABFS_SCHEME_DISPLAY_NAME, dialog );
         dialog.addVFSUIPanel( abfsPriority, abfsFileChooserDialog );
+        wasbFileChooserDialog = new WASBFileChooserDialog( Schemes.WASB_SCHEME, Schemes.WASB_SCHEME_DISPLAY_NAME, dialog );
+        dialog.addVFSUIPanel( wasbPriority, wasbFileChooserDialog );
         ncFileChooserDialog = new NamedClusterVfsFileChooserDialog( Schemes.NAMED_CLUSTER_SCHEME, Schemes.NAMED_CLUSTER_SCHEME_DISPLAY_NAME, dialog, null, null, ncService, rtTestActServ, rtTester );
         dialog.addVFSUIPanel( ncPriority, ncFileChooserDialog );
       }

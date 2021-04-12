@@ -5,6 +5,7 @@
   <bean id="hdfsFileNameParser" class="org.pentaho.big.data.impl.vfs.hdfs.HDFSFileNameParser" scope="singleton" factory-method="getInstance"/>
   <bean id="maprfsFileNameParser" class="org.pentaho.big.data.impl.vfs.hdfs.MapRFileNameParser" scope="singleton" factory-method="getInstance"/>
   <bean id="abfsFileNameParser" class="org.pentaho.big.data.impl.vfs.hdfs.AbfsFileNameParser" scope="singleton" factory-method="getInstance"/>
+  <bean id="wasbFileNameParser" class="org.pentaho.big.data.impl.vfs.hdfs.WasbFileNameParser" scope="singleton" factory-method="getInstance"/>
   <bean class="org.pentaho.big.data.impl.vfs.hdfs.HDFSFileProvider" scope="singleton">
     <argument ref="hadoopFileSystemService"/>
     <argument ref="namedClusterService"/>
@@ -32,7 +33,7 @@
   <bean class="org.pentaho.big.data.impl.vfs.hdfs.HDFSFileProvider" scope="singleton">
     <argument ref="hadoopFileSystemService"/>
     <argument ref="namedClusterService"/>
-    <argument ref="maprfsFileNameParser" />
+    <argument ref="wasbFileNameParser" />
     <argument value="wasb" type="java.lang.String"/>
     <argument ref="metastoreLocatorOsgi" />
   </bean>
@@ -40,7 +41,7 @@
   <bean class="org.pentaho.big.data.impl.vfs.hdfs.HDFSFileProvider" scope="singleton">
     <argument ref="hadoopFileSystemService"/>
     <argument ref="namedClusterService"/>
-    <argument ref="maprfsFileNameParser" />
+    <argument ref="wasbFileNameParser" />
     <argument value="wasbs" type="java.lang.String"/>
     <argument ref="metastoreLocatorOsgi" />
   </bean>

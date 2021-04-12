@@ -75,6 +75,10 @@ public class HadoopVfsConnection {
       return Schemes.ABFS_SCHEME.concat( "://" );
     }
 
+    if ( Schemes.WASB_SCHEME.equals( schemeName ) ) {
+      return Schemes.WASB_SCHEME.concat( "://" );
+    }
+
     StringBuffer urlString =
         new StringBuffer( !Utils.isEmpty( schemeName ) ? schemeName : SCHEME_NAME ).append( "://" );
     if ( !Utils.isEmpty( getUsername() ) ) {
