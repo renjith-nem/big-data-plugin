@@ -22,7 +22,12 @@
 
 package org.pentaho.big.data.kettle.plugins.hdfs;
 
-import org.pentaho.big.data.kettle.plugins.hdfs.vfs.*;
+import org.pentaho.big.data.kettle.plugins.hdfs.vfs.ABFSFileChooserDialog;
+import org.pentaho.big.data.kettle.plugins.hdfs.vfs.HadoopVfsFileChooserDialog;
+import org.pentaho.big.data.kettle.plugins.hdfs.vfs.MapRFSFileChooserDialog;
+import org.pentaho.big.data.kettle.plugins.hdfs.vfs.NamedClusterVfsFileChooserDialog;
+import org.pentaho.big.data.kettle.plugins.hdfs.vfs.Schemes;
+import org.pentaho.big.data.kettle.plugins.hdfs.vfs.WASBFileChooserDialog;
 import org.pentaho.hadoop.shim.api.cluster.NamedClusterService;
 import org.pentaho.di.core.annotations.LifecyclePlugin;
 import org.pentaho.di.core.lifecycle.LifeEventHandler;
