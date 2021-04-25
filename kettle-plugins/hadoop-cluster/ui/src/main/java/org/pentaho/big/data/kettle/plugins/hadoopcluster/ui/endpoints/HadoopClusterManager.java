@@ -116,6 +116,8 @@ public class HadoopClusterManager implements RuntimeTestProgressCallback {
   private static final String KEYTAB_IMPL_FILE = "keytabImpFile";
   public static final String MAPR_SHIM = "Map-R";
   public static final String MAPRFS_SCHEME = "maprfs";
+  public static final String AZURE_SHIM = "Azure HDInsights";
+  public static final String AZURE_SCHEME = "wasb";
 
   private static final LogChannelInterface log =
     KettleLogStore.getLogChannelInterfaceFactory().create( "HadoopClusterManager" );
@@ -216,6 +218,8 @@ public class HadoopClusterManager implements RuntimeTestProgressCallback {
       nc.setHdfsPassword( nc.encodePassword( model.getHdfsPassword() ) );
       if (MAPR_SHIM.equals(model.getShimVendor()))
         nc.setStorageScheme(MAPRFS_SCHEME);
+      if (AZURE_SHIM.equals(model.getShimVendor()))
+        nc.setStorageScheme(AZURE_SCHEME);
       if ( variableSpace != null ) {
         nc.shareVariablesWith( variableSpace );
       } else {
@@ -266,6 +270,8 @@ public class HadoopClusterManager implements RuntimeTestProgressCallback {
     resolveShimIdentifier( nc, model.getShimVendor(), model.getShimVersion() );
     if (MAPR_SHIM.equals(model.getShimVendor()))
       nc.setStorageScheme(MAPRFS_SCHEME);
+    if (AZURE_SHIM.equals(model.getShimVendor()))
+      nc.setStorageScheme(AZURE_SCHEME);
     setupKnoxSecurity( nc, model );
     if ( variableSpace != null ) {
       nc.shareVariablesWith( variableSpace );
